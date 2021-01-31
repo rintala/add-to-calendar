@@ -1,6 +1,7 @@
 export interface CalendarEvent {
   name: string;
   details: string | null;
+  url: string | null;
   location: string | null;
   startsAt: string;
   endsAt: string;
@@ -65,16 +66,12 @@ const makeICSCalendarUrl = (event: CalendarEvent) => {
     "BEGIN:VEVENT"
   ];
 
-  // In case of SSR, document won't be defined
-  if (typeof document !== "undefined") {
-    components.push(`URL:${document.URL}`);
-  }
-
   components.push(
     `DTSTART:${makeTime(event.startsAt)}`,
     `DTEND:${makeTime(event.endsAt)}`,
     `SUMMARY:${event.name}`,
     `DESCRIPTION:${event.details}`,
+    `URL:${event.url}`,
     `LOCATION:${event.location}`,
     "END:VEVENT",
     "END:VCALENDAR"
