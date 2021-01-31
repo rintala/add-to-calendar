@@ -11,7 +11,8 @@
     "prepublishOnly": "rm -f dist/* && yarn tsc --declaration && cp src/styles.css dist",
     "serve": "webpack serve --mode development --hot",
     "ssr": "yarn node ssr",
-    "test": "chq-scripts test"
+    "test": "chq-scripts test",
+    "build": "webpack --config webpack.config.babel.ts"
   },
   "repository": {
     "type": "git",

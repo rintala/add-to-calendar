@@ -5,19 +5,26 @@ import AddToCalendar from "../src/AddToCalendar";
 import "../src/styles.css";
 
 type FieldProps = {
-  children: string,
-  name: string,
-  value: string,
-  setValue: React.Dispatch<React.SetStateAction<string>>
+  children: string;
+  name: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Field = ({ children, name, value, setValue }: FieldProps) => {
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setValue(event.target.value);
 
   return (
     <label htmlFor={name}>
       {children}
-      <input id={name} name={name} type="text" value={value} onChange={onChange} />
+      <input
+        id={name}
+        name={name}
+        type="text"
+        value={value}
+        onChange={onChange}
+      />
     </label>
   );
 };
@@ -26,6 +33,7 @@ const App = () => {
   const [name, setName] = React.useState("Happy Hour");
   const [details, setDetails] = React.useState("Let's go after work");
   const [location, setLocation] = React.useState("Boston, MA");
+  const [url, setUrl] = React.useState("");
   const [startsAt, setStartsAt] = React.useState("2018-12-06T17:00:00-05:00");
   const [endsAt, setEndsAt] = React.useState("2018-12-06T18:00:00-05:00");
 
@@ -42,6 +50,9 @@ const App = () => {
         <Field name="location" value={location} setValue={setLocation}>
           Location
         </Field>
+        <Field name="url" value={url} setValue={setUrl}>
+          Url
+        </Field>
         <Field name="startsAt" value={startsAt} setValue={setStartsAt}>
           Starts At
         </Field>
@@ -49,7 +60,9 @@ const App = () => {
           Ends At
         </Field>
         <div className="chq-atc--wrap">
-          <AddToCalendar event={{ name, details, location, startsAt, endsAt }} />
+          <AddToCalendar
+            event={{ name, details, location, url, startsAt, endsAt }}
+          />
         </div>
       </main>
       {ReactDOM.createPortal(
